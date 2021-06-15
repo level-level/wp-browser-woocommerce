@@ -3,5 +3,12 @@
     "description": "WooCommerce object factories for WP Browser integration tests.",
     "type": "library",
     "license": "MIT",
-    "require": {}
+    "require": {
+        "lucatume/wp-browser": "^3.0"
+    },
+    "autoload": {
+        "psr-4":{
+            "LevelLevel\\WPBrowserWooCommerce\\": "src"       
+        }
+    }
 }
