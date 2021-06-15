@@ -1,0 +1,7 @@
+{
+    "name": "level-level/wp-browser-woocommerce",
+    "description": "WooCommerce object factories for WP Browser integration tests.",
+    "type": "library",
+    "license": "MIT",
+    "require": {}
+}
