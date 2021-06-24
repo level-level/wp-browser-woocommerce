@@ -158,6 +158,29 @@ $this->factory()->product->create_and_get(
 );
 ```
 
+### Tax rates
+
+You can access the order factory by using `$this->factory()->tax_rate` within a WooCommerce integration test. 
+
+The main method you'll use is `create_and_get( $args )`. The input you can give to an order are the same as you can give to the product creation API endpoint. 
+
+`create_and_get($args)` returns an array, as tax rates have no data class/model within WooCommerce.
+
+See https://woocommerce.github.io/woocommerce-rest-api-docs/#create-a-tax-rate
+
+Example:
+
+```php
+$this->factory()->tax_rate->create_and_get(
+    array(
+        'country'=>'NL',
+        'rate'=> '21',
+        'name'=>'BTW hoog tarief',
+        'shipping'=>false,
+    )
+);
+```
+
 ## Testcases
 For most testcases you will want to use `\LevelLevel\WPBrowserWooCommerce\WCTestCase`
 
