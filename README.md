@@ -171,7 +171,7 @@ See https://woocommerce.github.io/woocommerce-rest-api-docs/#create-a-tax-rate
 Example:
 
 ```php
-$this->factory()->product->create_and_get(
+$this->factory()->tax_rate->create_and_get(
     array(
         'country'=>'NL',
         'rate'=> '21',
