@@ -65,7 +65,7 @@ class TaxRate extends WP_UnitTest_Factory_For_Thing {
 	 *
 	 * @param int $object_id The tax rate ID.
 	 *
-	 * @return array Please not WooCommerce has no TaxRate object, so an unformatted array is given.
+	 * @return array WooCommerce has no TaxRate object, so an unformatted array is given.
 	 */
 	public function get_object_by_id( $object_id ) {
 		if ( ! is_int( $object_id ) ) {
