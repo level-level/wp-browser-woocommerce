@@ -181,6 +181,31 @@ $this->factory()->tax_rate->create_and_get(
 );
 ```
 
+### Coupons
+
+You can access the coupon factory by using `$this->factory()->coupon` within a WooCommerce integration test. 
+
+The main method you'll use is `create_and_get( $args )`. The input you can give to a coupon are the same as you can give to the coupon creation API endpoint. 
+
+`create_and_get($args)` returns the result of `new WC_Coupon( $coupon_id )` for the created object.
+
+See https://woocommerce.github.io/woocommerce-rest-api-docs/#create-a-coupon
+
+Example:
+
+```php
+$this->factory()->coupon->create_and_get(
+    array(
+        'code'            => '25off',
+        'discount_type'   => 'percent',
+        'amount'          => '10',
+        'individual_use' => true,
+        'exclude_sale_items'    => true,
+        'minimum_amount'    => '100.00',
+    )
+);
+```
+
 ## Testcases
 For most testcases you will want to use `\LevelLevel\WPBrowserWooCommerce\WCTestCase`
 
