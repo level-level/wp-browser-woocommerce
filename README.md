@@ -196,12 +196,12 @@ Example:
 ```php
 $this->factory()->coupon->create_and_get(
     array(
-        'code'            => '25off',
-        'discount_type'   => 'percent',
-        'amount'          => '10',
-        'individual_use' => true,
-        'exclude_sale_items'    => true,
-        'minimum_amount'    => '100.00',
+        'code'               => '25off',
+        'discount_type'      => 'percent',
+        'amount'             => '10',
+        'individual_use'     => true,
+        'exclude_sale_items' => true,
+        'minimum_amount'     => '100.00',
     )
 );
 ```
