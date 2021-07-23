@@ -79,11 +79,11 @@ class Order extends WP_UnitTest_Factory_For_Thing {
 	}
 
 	private function api_call_setup() {
-		$this->old_user = wp_get_current_user();
+		$this->old_user = get_current_user_id();
 
 		// Setup the administrator user so we can actually retrieve the order.
 		$user = new \WP_User( 1 );
-		wp_set_current_user( $user );
+		wp_set_current_user( $user->ID );
 
 		WC()->api->includes();
 		WC()->api->register_resources( new WC_API_Server( '/' ) );
