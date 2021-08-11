@@ -299,7 +299,7 @@ public function test_can_add_sample_to_cart() {
 
 ### Roadmap
 
-The main focus is on implementing more factories for other WooCommerce objects such as **coupons**, **customers**, **refunds** and **shipping methods**.
+The main focus is on implementing more factories for other WooCommerce objects such as **customers**, **refunds** and **shipping methods**.
 
 After this, focus might shift to popular extensions for WooCommerce, such as Subscriptions or Bookings.
 
