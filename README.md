@@ -206,6 +206,64 @@ $this->factory()->coupon->create_and_get(
 );
 ```
 
+### Subscriptions
+
+The subscription factory can only be used when the [WooCommerce Subscriptions](https://woocommerce.com/products/woocommerce-subscriptions/) plugin is installed and activated.
+
+You can access the subscription factory by using `$this->factory()->subscription` within a WooCommerce integration test. 
+
+The main method you'll use is `create_and_get( $args )`. The input you can give to a subscription are the same as you can give to the subscription creation API endpoint. 
+
+`create_and_get($args)` returns the result of `wcs_get_subscription( $subscription_id )` for the created object.
+
+See https://woocommerce.github.io/subscriptions-rest-api-docs/v1.html#create-a-subscription
+
+Example:
+
+```php
+$this->factory()->subscription->create_and_get(
+    array(
+        'customer_id' => 1,
+        'parent_id' => 1,
+        'status' => 'pending',
+        'billing_period' => 'month',
+        'billing_interval' => 1,
+        'start_date' => ( new DateTime( 'now', wp_timezone() ) )->format( 'Y-m-d H:i:s' ),
+        'next_payment_date' => ( new DateTime( '+1 month', wp_timezone() ) )->format( 'Y-m-d H:i:s' ),
+        'payment_method' => '',
+        'billing' => array(
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'address_1' => 'Market',
+            'house_number' => '1',
+            'address_2' => '',
+            'city' => 'Rotterdam',
+            'postcode' => '3456AB',
+            'country' => 'NL',
+            'email' => 'john.doe@example.com',
+        ),
+        'shipping' => array(
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'address_1' => 'Memory Lane',
+            'house_number' => '1',
+            'address_2' => '',
+            'city' => 'Rotterdam',
+            'postcode' => '3456AB',
+            'country' => 'NL',
+        ),
+        'line_items' => array(
+            array(
+                'product_id' => 1,
+                'quantity' => 1,
+                'subtotal' => '10.00',
+                'total' => '10.00',
+            )
+        )
+    )
+);
+```
+
 ## Testcases
 For most testcases you will want to use `\LevelLevel\WPBrowserWooCommerce\WCTestCase`
 
@@ -241,7 +299,7 @@ public function test_can_add_sample_to_cart() {
 
 ### Roadmap
 
-The main focus is on implementing more factories for other WooCommerce objects such as **coupons**, **customers**, **refunds** and **shipping methods**.
+The main focus is on implementing more factories for other WooCommerce objects such as **customers**, **refunds** and **shipping methods**.
 
 After this, focus might shift to popular extensions for WooCommerce, such as Subscriptions or Bookings.
 
