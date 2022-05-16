@@ -214,7 +214,7 @@ The main method you'll use is `create_and_get( $args )`. The input you can give 
 
 `create_and_get($args)` returns the result of `new WC_Shipping_Zone( $shipping_zone_id )` for the created object.
 
-See https://woocommerce.github.io/woocommerce-rest-api-docs/#create-a-coupon
+See https://woocommerce.github.io/woocommerce-rest-api-docs/?shell#create-a-shipping-zone
 
 Example:
 
@@ -223,6 +223,31 @@ $this->factory()->shipping_zone->create_and_get(
     array(
         'name' => 'Global'
     )
+);
+```
+
+### Shipping zone methods
+
+You can access the shipping zone method factory by using `$this->factory()->shipping_zone_method` within a WooCommerce integration test. 
+
+The main method you'll use is `create_and_get( $args )`. The input you can give to a shipping zone method are the same as you can give to the shipping zone method creation API endpoint. 
+
+`create_and_get($args)` returns an `WC_Shipping_Method` object.
+
+Not that you have to set a zone_id, as created with the `shipping_zone` factory.
+
+See https://woocommerce.github.io/woocommerce-rest-api-docs/?shell#include-a-shipping-method-to-a-shipping-zone
+
+Example:
+
+```php
+$this->factory()->shipping_zone_method->zone_id(5)->create_and_get(
+    array(
+        'method_id' => 'flat_rate',
+        'settings'  => array(
+            'cost'=> '20.00',
+        ),
+    ),
 );
 ```
 
@@ -319,7 +344,7 @@ public function test_can_add_sample_to_cart() {
 
 ### Roadmap
 
-The main focus is on implementing more factories for other WooCommerce objects such as **customers**, **refunds** and **shipping methods**.
+The main focus is on implementing more factories for other WooCommerce objects such as **customers**, and **refunds**.
 
 After this, focus might shift to popular extensions for WooCommerce, such as Subscriptions or Bookings.
 
