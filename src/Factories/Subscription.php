@@ -8,6 +8,7 @@ use WC_Subscription;
 use WP_UnitTest_Factory_For_Thing;
 
 class Subscription extends WP_UnitTest_Factory_For_Thing {
+	use APICalling;
 	/**
 	 * Creates a subscription. Using the API method.
 	 *
@@ -16,19 +17,11 @@ class Subscription extends WP_UnitTest_Factory_For_Thing {
 	 * @return int
 	 */
 	public function create_object( $args ) {
-		$this->api_call_setup();
-
 		$request = new \WP_REST_Request( 'post', '/wc/v1/subscriptions' );
 		$request->add_header( 'Content-Type', 'application/json' );
-
 		$request->set_body( json_encode( $args ) ); //phpcs:ignore
-		$response = rest_do_request( $request );
 
-		$this->api_call_teardown();
-
-		if ( $response->is_error() ) {
-			throw new Exception( $response->get_data()['message'] );
-		}
+		$response = $this->do_request( $request );
 		return $response->get_data()['id'];
 	}
 
@@ -44,20 +37,12 @@ class Subscription extends WP_UnitTest_Factory_For_Thing {
 		if ( ! is_int( $object ) ) {
 			throw new TypeError( '$object must be an int' );
 		}
-		$this->api_call_setup();
 
 		$request = new \WP_REST_Request( 'put', '/wc/v1/subscriptions/' . $object );
 		$request->add_header( 'Content-Type', 'application/json' );
-
 		$request->set_body( json_encode( $fields ) ); //phpcs:ignore
-		$response = rest_do_request( $request );
 
-		$this->api_call_teardown();
-
-		if ( $response->is_error() ) {
-			throw new Exception( $response->get_data()['message'] );
-		}
-
+		$response = $this->do_request( $request );
 		return $response->get_data()['id'];
 	}
 
@@ -74,18 +59,5 @@ class Subscription extends WP_UnitTest_Factory_For_Thing {
 			throw new Exception( 'Could not retrieve subscription with ID ' . $object_id );
 		}
 		return $subscription;
-	}
-
-	private function api_call_setup() {
-		$this->old_user = get_current_user_id();
-
-		// Setup the administrator user so we can actually retrieve the order.
-		$user = new \WP_User( 1 );
-		wp_set_current_user( $user->ID );
-	}
-
-
-	private function api_call_teardown() {
-		wp_set_current_user( $this->old_user );
 	}
 }
