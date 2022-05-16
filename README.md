@@ -206,6 +206,26 @@ $this->factory()->coupon->create_and_get(
 );
 ```
 
+### Shipping zones
+
+You can access the shipping zone factory by using `$this->factory()->shipping_zone` within a WooCommerce integration test. 
+
+The main method you'll use is `create_and_get( $args )`. The input you can give to a shipping zone are the same as you can give to the shipping zone creation API endpoint. 
+
+`create_and_get($args)` returns the result of `new WC_Shipping_Zone( $shipping_zone_id )` for the created object.
+
+See https://woocommerce.github.io/woocommerce-rest-api-docs/#create-a-coupon
+
+Example:
+
+```php
+$this->factory()->shipping_zone->create_and_get(
+    array(
+        'name' => 'Global'
+    )
+);
+```
+
 ### Subscriptions
 
 The subscription factory can only be used when the [WooCommerce Subscriptions](https://woocommerce.com/products/woocommerce-subscriptions/) plugin is installed and activated.

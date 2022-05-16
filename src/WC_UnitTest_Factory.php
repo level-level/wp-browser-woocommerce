@@ -5,6 +5,7 @@ namespace LevelLevel\WPBrowserWooCommerce;
 use LevelLevel\WPBrowserWooCommerce\Factories\Coupon;
 use LevelLevel\WPBrowserWooCommerce\Factories\Product;
 use LevelLevel\WPBrowserWooCommerce\Factories\Order;
+use LevelLevel\WPBrowserWooCommerce\Factories\ShippingZone;
 use LevelLevel\WPBrowserWooCommerce\Factories\Subscription;
 use LevelLevel\WPBrowserWooCommerce\Factories\TaxRate;
 use WP_UnitTest_Factory;
@@ -41,6 +42,7 @@ class WC_UnitTest_Factory extends WP_UnitTest_Factory {
 		$this->order        = new Order( $this );
 		$this->tax_rate     = new TaxRate( $this );
 		$this->coupon       = new Coupon( $this );
+		$this->shipping_zone = new ShippingZone( $this );
 		$this->subscription = new Subscription( $this );
 	}
 }
