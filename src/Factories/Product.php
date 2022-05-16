@@ -4,12 +4,12 @@ namespace LevelLevel\WPBrowserWooCommerce\Factories;
 
 use Exception;
 use TypeError;
-use WC_API_Server;
 use WC_Product;
-use WP_Error;
 use WP_UnitTest_Factory_For_Thing;
 
 class Product extends WP_UnitTest_Factory_For_Thing {
+	use APICalling;
+
 	/**
 	 * Creates a product. Using the API method.
 	 *
@@ -18,19 +18,11 @@ class Product extends WP_UnitTest_Factory_For_Thing {
 	 * @return int
 	 */
 	public function create_object( $args ) {
-		$this->api_call_setup();
-
 		$request = new \WP_REST_Request( 'post', '/wc/v3/products' );
 		$request->add_header( 'Content-Type', 'application/json' );
-
 		$request->set_body( json_encode( $args ) ); //phpcs:ignore
-		$response = rest_do_request( $request );
 
-		$this->api_call_teardown();
-
-		if ( $response->is_error() ) {
-			throw new Exception( $response->get_data()['message'] );
-		}
+		$response = $this->do_request( $request );
 		return $response->get_data()['id'];
 	}
 
@@ -46,20 +38,12 @@ class Product extends WP_UnitTest_Factory_For_Thing {
 		if ( ! is_int( $object ) ) {
 			throw new TypeError( '$object must be an int' );
 		}
-		$this->api_call_setup();
 
 		$request = new \WP_REST_Request( 'put', '/wc/v3/products/' . $object );
 		$request->add_header( 'Content-Type', 'application/json' );
-
 		$request->set_body( json_encode( $fields ) ); //phpcs:ignore
-		$response = rest_do_request( $request );
-
-		$this->api_call_teardown();
-
-		if ( $response->is_error() ) {
-			throw new Exception( $response->get_data()['message'] );
-		}
-
+		
+		$response = $this->do_request( $request );
 		return $response->get_data()['id'];
 	}
 
@@ -76,18 +60,5 @@ class Product extends WP_UnitTest_Factory_For_Thing {
 			throw new Exception( 'Could not retrieve product with ID ' . $object_id );
 		}
 		return $product;
-	}
-
-	private function api_call_setup() {
-		$this->old_user = get_current_user_id();
-
-		// Setup the administrator user so we can actually retrieve the order.
-		$user = new \WP_User( 1 );
-		wp_set_current_user( $user->ID );
-	}
-
-
-	private function api_call_teardown() {
-		wp_set_current_user( $this->old_user );
 	}
 }
