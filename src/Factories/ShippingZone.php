@@ -61,4 +61,20 @@ class ShippingZone extends WP_UnitTest_Factory_For_Thing {
 		}
 		return $shipping_zone;
 	}
+
+	/**
+	 * Sets shipping zone locations.
+	 * @param int $object_id 
+	 * @param array $data See https://woocommerce.github.io/woocommerce-rest-api-docs/?shell#update-a-locations-of-a-shipping-zone
+	 * @return int 
+	 * @throws Exception 
+	 */
+	public function set_zone_locations( $object_id, $data ) {
+		$request = new \WP_REST_Request( 'PUT', '/wc/v3/shipping/zones/' . $object_id . '/locations' );
+		$request->add_header( 'Content-Type', 'application/json' );
+		$request->set_body( json_encode( $data ) ); //phpcs:ignore
+
+		$response = $this->do_request( $request );
+		return $response->get_data()['id'];
+	}
 }

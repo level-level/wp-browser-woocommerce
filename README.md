@@ -226,6 +226,21 @@ $this->factory()->shipping_zone->create_and_get(
 );
 ```
 
+#### Adding locations
+
+It's possible to add location rules to shipping zones. See the code below for an example:
+
+```php
+$this->factory()->shipping_zone->set_zone_locations(
+    1, array(
+        array(
+            'code' => '3024*',
+            'type' => 'postcode',
+        ),
+    )
+);
+```
+
 ### Shipping zone methods
 
 You can access the shipping zone method factory by using `$this->factory()->shipping_zone_method` within a WooCommerce integration test. 
