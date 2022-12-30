@@ -75,6 +75,6 @@ class ShippingZone extends WP_UnitTest_Factory_For_Thing {
 		$request->set_body( json_encode( $data ) ); //phpcs:ignore
 
 		$response = $this->do_request( $request );
-		return $response->get_data()['code'];
+		return $response->get_data()[0]['code'];
 	}
 }
