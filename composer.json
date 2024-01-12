@@ -4,7 +4,7 @@
     "type": "library",
     "license": "MIT",
     "require": {
-        "lucatume/wp-browser": "^2|^3"
+        "lucatume/wp-browser": "^3|^4"
     },
     "autoload": {
         "psr-4":{
