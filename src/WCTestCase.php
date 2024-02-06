@@ -2,7 +2,7 @@
 
 namespace LevelLevel\WPBrowserWooCommerce;
 
-use Codeception\TestCase\WPTestCase;
+use lucatume\WPBrowser\TestCase\WPTestCase;
 
 class WCTestCase extends WPTestCase {
 	/**

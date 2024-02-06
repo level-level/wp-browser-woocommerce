@@ -2,9 +2,9 @@
 
 namespace LevelLevel\WPBrowserWooCommerce;
 
-use Codeception\TestCase\WPAjaxTestCase;
+use lucatume\WPBrowser\TestCase\WPTestCase;
 
-class WCAjaxTestCase extends WPAjaxTestCase {
+class WCAjaxTestCase extends WPTestCase {
 	/**
 	 * @return WC_UnitTest_Factory
 	 */
