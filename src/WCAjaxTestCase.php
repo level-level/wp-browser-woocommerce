@@ -5,6 +5,8 @@ namespace LevelLevel\WPBrowserWooCommerce;
 use Codeception\TestCase\WPAjaxTestCase;
 
 class WCAjaxTestCase extends WPAjaxTestCase {
+	private $original_acf_stores;
+
 	/**
 	 * @return WC_UnitTest_Factory
 	 */
@@ -14,5 +16,25 @@ class WCAjaxTestCase extends WPAjaxTestCase {
 			$factory = new WC_UnitTest_Factory();
 		}
 		return $factory;
+	}
+
+	public function _setUp()
+	{
+		parent::_setUp();
+		global $acf_stores;
+		$this->original_acf_stores = serialize( $acf_stores );
+		WC()->shipping()->unregister_shipping_methods();
+		WC()->shipping()->reset_shipping();
+		WC()->cart = null;
+		WC()->session = null;
+		WC()->customer = null;
+		wc_load_cart();
+	}
+
+	public function _tearDown()
+	{
+		parent::_tearDown();
+		global $acf_stores;
+		$acf_stores = unserialize($this->original_acf_stores);
 	}
 }
