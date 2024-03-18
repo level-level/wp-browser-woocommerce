@@ -5,10 +5,7 @@ namespace LevelLevel\WPBrowserWooCommerce;
 use Codeception\TestCase\WPTestCase;
 
 class WCTestCase extends WPTestCase {
-	private $original_cart;
-	private $original_session;
-	private $original_customer;
-	private $original_query;
+	private $original_acf_stores;
 
 	/**
 	 * @return WC_UnitTest_Factory
@@ -24,18 +21,21 @@ class WCTestCase extends WPTestCase {
 	public function _setUp()
 	{
 		parent::_setUp();
-		$this->original_cart = WC()->cart;
-		$this->original_session = WC()->session;
-		$this->original_customer = WC()->customer;
-		$this->original_query = WC()->query;
+		global $acf_stores;
+		$this->original_acf_stores = serialize( $acf_stores );
+		WC()->shipping()->unregister_shipping_methods();
+		WC()->shipping()->reset_shipping();
+		WC()->cart = null;
+		WC()->session = null;
+		WC()->customer = null;
+		wc_load_cart();
 	}
 
 	public function _tearDown()
 	{
 		parent::_tearDown();
-		WC()->cart = $this->original_cart;
-		WC()->session = $this->original_session;
-		WC()->customer = $this->original_customer;
-		WC()->query = $this->original_query;
+		wc_clear_notices();
+		global $acf_stores;
+		$acf_stores = unserialize($this->original_acf_stores);
 	}
 }
