@@ -14,9 +14,6 @@ trait APICalling{
 		// Setup the administrator user so we can actually retrieve the order.
 		$user = new \WP_User( 1 );
 		wp_set_current_user( $user->ID );
-
-		WC()->api->includes();
-		WC()->api->register_resources( new WC_API_Server( '/' ) );
 	}
 
     private function do_request( WP_REST_Request $request ): WP_REST_Response{
