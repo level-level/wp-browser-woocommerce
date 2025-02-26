@@ -4,11 +4,11 @@
     "type": "library",
     "license": "MIT",
     "require": {
-        "lucatume/wp-browser": "^2|^3|^4"
+        "lucatume/wp-browser": "^4"
     },
     "autoload": {
         "psr-4":{
-            "LevelLevel\\WPBrowserWooCommerce\\": "src"       
+            "LevelLevel\\WPBrowserWooCommerce\\": "src"
         }
     }
 }

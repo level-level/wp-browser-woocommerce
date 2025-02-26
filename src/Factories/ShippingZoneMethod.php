@@ -7,16 +7,12 @@ use Exception;
 use TypeError;
 use WC_Shipping_Method;
 use WC_Shipping_Zone;
-use WC_Shipping_Zones;
 use WP_UnitTest_Factory_For_Thing;
 
 class ShippingZoneMethod extends WP_UnitTest_Factory_For_Thing {
 	use APICalling;
 
-	/**
-	 * @var int
-	 */
-	private $zone_id = null;
+	private ?int $zone_id = null;
 
 	public function zone_id( int $zone_id ): self {
 		$this->zone_id = $zone_id;

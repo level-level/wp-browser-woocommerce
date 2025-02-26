@@ -12,30 +12,14 @@ use LevelLevel\WPBrowserWooCommerce\Factories\TaxRate;
 use WP_UnitTest_Factory;
 
 class WC_UnitTest_Factory extends WP_UnitTest_Factory {
-	/**
-	 * @var Product
-	 */
-	public $product;
 
-	/**
-	 * @var Order
-	 */
-	public $order;
-
-	/**
-	 * @var TaxRate
-	 */
-	public $tax_rate;
-
-	/**
-	 * @var Coupon
-	 */
-	public $coupon;
-
-	/**
-	 * @var Subscription
-	 */
-	public $subscription;
+	public Product $product;
+	public Order $order;
+	public TaxRate $tax_rate;
+	public Coupon $coupon;
+	public ShippingZone $shipping_zone;
+	public ShippingZoneMethod $shipping_zone_method;
+	public Subscription $subscription;
 
 	public function __construct() {
 		parent::__construct();
