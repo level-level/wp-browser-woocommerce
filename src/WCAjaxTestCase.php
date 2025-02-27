@@ -2,15 +2,12 @@
 
 namespace LevelLevel\WPBrowserWooCommerce;
 
-use Codeception\TestCase\WPAjaxTestCase;
+use lucatume\WPBrowser\TestCase\WPAjaxTestCase;
 
 class WCAjaxTestCase extends WPAjaxTestCase {
 	private $original_acf_stores;
 
-	/**
-	 * @return WC_UnitTest_Factory
-	 */
-	protected static function factory() {
+	protected static function factory(): WC_UnitTest_Factory {
 		static $factory = null;
 		if ( ! $factory ) {
 			$factory = new WC_UnitTest_Factory();
